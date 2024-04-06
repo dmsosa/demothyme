@@ -3,31 +3,39 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title th:text="#{title}">DMServices: Login</title>
-
+    <title th:text="#{title}">DMSosa: Thymeleaf</title>
+    <link rel="icon" href="../static/images/favicon.ico" type="image/x-icon"/>
 </head>
 <body>
 <div class="header">
     <div class="navbar">
-        <div class="logo-div" ><img src=""/><a class="logo-link">Pokedemo</a></div>
+        <div class="logo-div" ><img src="../static/images/pokeball.png"/><a class="logo-link">Pokedemo</a></div>
         <ul class="menu">
             <li class="menu-item">
-                <a class="menu-link">Explore</a>
+                <a class="menu-link" th:text="#{navbar.option.one}">Explore</a>
             </li>
             <li class="menu-item">
-                <a class="menu-link">Discover</a>
+                <a class="menu-link" th:text="#{navbar.option.two}">Discover</a>
             </li>
             <li class="menu-item">
-                <a class="menu-link">Challenge</a>
+                <a class="menu-link" th:text="#{navbar.option.three}">Challenge</a>
             </li>
         </ul>
     </div>
 </div>
 <div class="main">
-    <div class="background">
+    <div class="banner">
         <h1 th:utext="#{login.welcome}">Ich bin gespannt!</h1>
+        <div>
+            <h2 th:utext="#{banner.text}">Ubung is das beste dass man machen kann</h2>
+        </div>
     </div>
-    <div class="container">
+    <form class="trainerFinder">
+        <label for="trainerName"></label>
+        <input id="trainerName" type="text" placeholder="search a trainer"/>
+        <button type="submit">Search</button>
+    </form>
+    <div class="container" th:if="${trainer.name == #httpServletRequest.getParams()}">
         <div class="row">
             <div class="col">
                 <div>

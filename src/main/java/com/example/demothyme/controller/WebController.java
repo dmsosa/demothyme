@@ -5,6 +5,7 @@ import com.example.demothyme.model.Trainer;
 import com.example.demothyme.model.Type;
 import com.example.demothyme.service.PokemonService;
 import com.example.demothyme.service.TrainerService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,7 @@ public class WebController {
 
         this.pokemonService = pokemonService;
         this.trainerService = trainerService;
+
     }
 
 

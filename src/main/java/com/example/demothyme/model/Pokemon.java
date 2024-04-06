@@ -1,6 +1,7 @@
 package com.example.demothyme.model;
 
 import jakarta.persistence.*;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,4 +26,5 @@ public class Pokemon {
     @ManyToOne
     @JoinColumn( name = "trainer_name")
     private Trainer trainer;
+
 }
