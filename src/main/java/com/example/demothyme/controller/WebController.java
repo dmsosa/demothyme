@@ -41,9 +41,13 @@ public class WebController {
         return trainerService.findTrainer("Ash Ketchum");
     }
 
+    @ModelAttribute(name = "allPokemon")
+    public List<Pokemon> getAllPokemon() {
+        return pokemonService.getAllPokemon();
+    }
 
     @RequestMapping("/")
     public String showPage(Model model) {
-        return "store";
+        return "index";
     }
 }

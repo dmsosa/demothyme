@@ -1,0 +1,362 @@
+* {
+ box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+h1 {
+    margin: 0;
+}
+
+.container {
+    margin: 0 0.5rem;
+    padding: 0 0.6rem;
+}
+.row {
+    display: flex;
+    margin: 0;
+}
+.col {
+    display: block
+}
+.header {
+    background-color: darkred;
+    height: 6rem;
+
+}
+.navbar {
+        display: flex;
+        padding: 0.5rem 1.6rem;
+        justify-content: center;
+}
+
+.logo-div {
+    display: flex;
+    .logo {
+        display: inline;
+        max-width: 4rem;
+
+    }
+    .logo-link {
+        transition: color 1s;
+        display: inline;
+        padding: 0.7rem 0.5rem 0rem;
+        font-weight: bolder;
+        font-size: x-large;
+        &:hover {
+            cursor: pointer;
+            color: red;
+        }
+    }
+}
+.menu {
+    margin-left: 4rem;
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    color: white;
+}
+.menu-item {
+    .menu-link {
+        font-style: sans-serif;
+        font-weight: bold;
+        margin-left: 4rem;
+        &:hover {
+            cursor: pointer;
+        }
+            color: white;
+    }
+}
+
+.main {
+    padding-top: 2rem;
+    max-height: calc(100vh- 24rem);
+    .container {
+        max-width: 70%;
+        margin: 0 auto;
+    }
+    .row {
+        justify-content: space-between;
+    }
+}
+
+.banner {
+
+    margin-bottom: 5rem;
+    h1 {
+        text-align: center;
+    }
+    h2 {
+        margin: 0 auto;
+        padding: 0.5rem 2rem;
+        background-color: white;
+        max-width: fit-content;
+        box-shadow: 0.5rem 0.5rem 0 black;
+        border-left: 0.2rem solid darkred;
+        border-top: 0.2rem solid darkred;
+
+    }
+}
+.trainerFinder {
+    form {
+
+    }
+    label {
+        display: block;
+        text-transform: uppercase;
+        font-weight: bolder;
+        margin-left: 1rem;
+        background-color:  rgba( 238, 49, 27, 1 );
+        padding: 0.25rem 1rem;
+        max-width: fit-content;
+        border-top-right-radius: 0.5rem;
+        border-top-left-radius: 0.5rem;
+        color: white;
+        letter-spacing: 0.12rem;
+    }
+    input {
+        background-color: white;
+        padding: 0.5rem 2rem;
+        border-radius: 0.5rem;
+        border: solid 0.2rem  rgba( 238, 49, 27, 1 );
+        &:focus {
+            border: solid 0.2rem  rgba( 238, 49, 27, 1 );
+        };
+    }
+    button {
+        padding: 0.5rem 2rem;
+        display: block;
+        margin-top: 0.5rem;
+        margin-left: 0.5rem;
+        border: none;
+        outline: black solid 0.1rem;
+        border-radius: 0.4rem;
+        text-transform: uppercase;
+        font-style: italic;
+        transition: background 0.2s;
+        transition: outline 0.2s;
+        &:hover {
+            color: white;
+            border: none;
+            background-color:  rgba( 238, 49, 27, 1 );
+            outline: solid 0.5rem  rgba( 238, 49, 27, 0.5 );
+        }
+    }
+}
+.currently-selected {
+    margin-bottom: 4rem;
+    border-radius: 0.5rem;
+    h3 {
+        margin: -0.1rem -0.2rem 1rem -0.2rem;
+        background-color: rgba( 238, 49, 27, 1 );
+        border-radius: 0.5rem;
+        color: whitesmoke;
+        padding: 0.5rem 1.7rem;
+    }
+    img {
+        display: block;
+        margin: 0 auto;
+        max-width: 10rem;
+        border-radius: 5rem;
+        border: solid 0.3rem rgba( 238, 49, 27, 1 );
+    }
+    span {
+        display: block;
+        text-align: center;
+        background-color: rgba( 238, 49, 27, 1 );
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+        max-width: fit-content;
+        margin: 0 auto;
+        margin-top: -0.3rem;
+        padding: 0.5rem 1rem;
+        color: whitesmoke;
+        font-weight: bold;
+        letter-spacing: 0.1rem;
+
+    }
+}
+
+.container.content-container {
+
+    .col {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+    .row {
+        &:nth-child(1) {
+            margin-left: -3rem;
+
+        }
+        &:last-child {
+            margin-right: -3rem;
+        }
+    }
+
+}
+.table {
+    border-collapse: collapse;
+    padding: 0;
+    border: red solid 0.4rem;
+    caption {
+        margin-top: 0;
+        text-align: center;
+        font-weight: bolder;
+    }
+}
+th, td {
+    padding: 0.5rem 1.6rem;
+    border: solid 0.25rem rgba( 223, 48, 27, 0.8 );
+
+}
+thead {
+    margin: 0;
+    background-color: rgba( 238, 49, 27, 1 );
+}
+
+tbody {
+        background-color: rgba( 255, 67, 47, 0.6 );
+}
+
+.chart-header {
+
+    background-color: rgba( 238, 49, 27, 1 );
+    padding: 0.125rem 1rem;
+    border-radius: 1rem;
+    border-top: white solid 0.25rem;
+    border-right: white solid 0.25rem;
+    border-left: rgba( 147, 18, 3, 1 ) solid 0.25rem;
+    border-bottom: rgba( 147, 18, 3, 1 ) solid 0.25rem;
+    margin-bottom: 1rem;
+    h3 {
+        color: white;
+        font-style: italic;
+        letter-spacing: 0.25em;
+    }
+}
+.chart-footer {
+    padding: 0.2rem 1.6rem;
+    background-color: rgba(211, 41, 21, 1);
+    color: white;
+    border-right: solid 0.5rem darkred;
+    border-left: solid 0.5rem darkred;
+    border-bottom: solid 0.5rem darkred;
+}
+#chart-body {
+    border: 0.5rem solid darkred;
+        .row {
+            justify-content: space-between;
+            border-bottom: 0.5rem darkred solid;
+            margin: 0;
+            padding: 0;
+            &:nth-child(1) {
+                margin: 0;
+            }
+            &:last-child(0) {
+                margin: 0;
+            }
+
+        }
+        .col {
+            padding: 0;
+        }
+}
+
+.chart-picture {
+    border-right: darkred solid 0.4rem;
+    img {
+        max-width: 10rem;
+    }
+}
+.chart-trainer {
+    flex-grow: 1;
+    background-color: lightpink;
+    .chart-trainer-header {
+        padding 0;
+        width: 100%;
+        display: block;
+        img {
+            display: block;
+            margin: 0 auto 0.5rem;
+            margin-top: -0.25rem;
+            max-width: 6rem;
+            border: darkred 0.25rem solid;
+        }
+        h5 {
+            text-align: center;
+            display: block;
+            margin: 0 auto;
+            padding-bottom: 0.5rem;
+            border-bottom: 0.25rem darkred solid;
+            text-transform: uppercase;
+        }
+    }
+
+}
+.chart-description {
+    margin: 0;
+    width: 100%;
+    background: lightpink;
+    h5 {
+        display: block;
+        color: white;
+        letter-spacing: 0.05em;
+        margin: 0;
+        padding: 0.25rem 1rem;
+        background-color: rgba( 238, 49, 27, 1 );
+        width: 100%;
+    }
+}
+.chart-trainer-header {
+    display: flex;
+}
+.chart-trainer {
+    ul {
+        list-style: disc;
+        color: gold;
+        margin: 1rem 0 0 2rem;
+        padding: 0 1rem;
+    }
+    li {
+        a {
+            color:  black;
+            text-transform: Capitalize;
+        }
+    }
+}
+
+.footer {
+    margin: 0;
+    height: 18rem;
+    background-color: darkred;
+    h1 {
+        text-align: center;
+        padding: 2rem;
+    }
+    ul {
+        display: flex;
+        margin: 0 auto;
+        justify-content: space-between;
+        max-width: 50%;
+    }
+    li {
+        a {
+            text-transform: uppercase;
+        }
+    }
+    p {
+        display: block;
+        margin: 0 auto;
+        margin-top: 2rem;
+        text-align: center;
+
+    }
+}

@@ -1,82 +1,136 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title th:text="#{title}">DMSosa: Thymeleaf</title>
-    <link rel="icon" href="../static/images/favicon.ico" type="image/x-icon"/>
-</head>
-<body>
-<div class="header">
-    <div class="navbar">
-        <div class="logo-div" ><img src="../static/images/pokeball.png"/><a class="logo-link">Pokedemo</a></div>
-        <ul class="menu">
-            <li class="menu-item">
-                <a class="menu-link" th:text="#{navbar.option.one}">Explore</a>
-            </li>
-            <li class="menu-item">
-                <a class="menu-link" th:text="#{navbar.option.two}">Discover</a>
-            </li>
-            <li class="menu-item">
-                <a class="menu-link" th:text="#{navbar.option.three}">Challenge</a>
-            </li>
-        </ul>
-    </div>
-</div>
-<div class="main">
-    <div class="banner">
-        <h1 th:utext="#{login.welcome}">Ich bin gespannt!</h1>
-        <div>
-            <h2 th:utext="#{banner.text}">Ubung is das beste dass man machen kann</h2>
-        </div>
-    </div>
-    <form class="trainerFinder">
-        <label for="trainerName"></label>
-        <input id="trainerName" type="text" placeholder="search a trainer"/>
-        <button type="submit">Search</button>
-    </form>
-    <div class="container" th:if="${trainer.name == #httpServletRequest.getParams()}">
-        <div class="row">
-            <div class="col">
-                <div>
-                    <h2 th:text="#{${teamMsg}(${session.user.name})}">Your pokemon team</h2><span th:text="${today}">Date: 06/04/2024</span>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title th:text="#{title}">DMSosa: Thymeleaf</title>
+        <link rel="icon" href="../static/images/favicon.ico"  th:href="@{/images/favicon.ico}" type="image/x-icon"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
+    </head>
+    <body>
+        <div class="header">
+            <div class="navbar">
+                <div class="logo-div" >
+                    <img src="../static/images/pokeball.png"
+                         th:src="@{/images/pokeball.png}"
+                         alt="Pokeball Icon"
+                         title="Thymeleaf & Spring with Pokemon"
+                         th:alt-title="#{title.application}"
+                         class="logo"
+                    />
+                    <a class="logo-link">Pokedemo</a>
                 </div>
-                <div>
-                    <ul>
-                        <li>
-                            <a class="pokemon-name">Pokemon name</a>
-                        </li>
-                        <li>
-                            <p class="pokemon-type">Pokemon type</p>
-                        </li>
-                        <li>
-                            <p class="pokemon-level">Pokemon level</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col selected-pokemon">
-                <div class="chart-title"><h2>Selected pokemon</h2></div>
-                <a class="chart-name">Pokemon name</a>
-                <span class="chart-level"></span>
-                <img class="chart-img" src=""/>
-                <p class="chart-ability">Pokemon ability: </p>
-                <span class="chart-description">Ability description</span>
+                <ul class="menu">
+                    <li class="menu-item">
+                        <a class="menu-link" th:text="#{navbar.option.one}">Explore</a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" th:text="#{navbar.option.two}">Discover</a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" th:text="#{navbar.option.three}">Challenge</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
-</div>
-<div class="footer">
-    <div>
-        <h1>Join to the battle</h1>
-        <ul>
-            <li>Social Media</li>
-            <li>About us</li>
-            <li>Continue with</li>
-        </ul>
-        <p>Copyright / Duvi 2024</p>
-    </div>
-</div>
-</body>
+        <div class="main">
+            <div class="banner">
+                <h1 th:utext="#{login.welcome}">Welcome to your PC  <span th:if="${today}">today is: 08/04/2024</span></h1>
+                <div>
+                    <h2 th:utext="#{banner.text}">Patience is a tree where the roots are sour but the fruits are so sweet!</h2>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <form class="trainerFinder">
+                            <label for="trainerName" th:text="#{trainer.finder}">Trainer Name</label>
+                            <input id="trainerName" type="text" placeholder="search a trainer" name="trainer"/>
+                            <button type="submit" th:text="#{trainer.finder.search}">Search</button>
+                        </form>
+                    </div>
+                    <div class="col">
+                        <div class="currently-selected">
+                            <h3 th:text="#{trainer.selected}">Currently selected:</h3>
+                            <div>
+                                <img src="https://pokemongohub.net/wp-content/uploads/2023/06/giovanni.jpg"/>
+                                <span>Giovanni</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container content-container">
+                <div class="row">
+                    <div class="col">
+                        <table class="table" th:each="pokemon : ${AllPokemon}">
+                            <caption>Giovanni's team</caption>
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th th:text="#{table.type}">Type</th>
+                                <th>Ability</th>
+                                <th>Trainer</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th th:text="${pokemon.name}">Charmander</th>
+                                <td th:text="${pokemon.type}">Fire</td>
+                                <td th:text="${pokemon.ability}">Blaze</td>
+                                <td th:text="${pokemon.trainer.name}">Giovanni</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col">
+                        <div class="chart">
+                            <div class="chart-header">
+                                <h3>P.name</h3>
+                            </div>
+                            <div id="chart-body" class="chart-body">
+                                <div class="row" id="r">
+                                    <div class="chart-picture col">
+                                        <img src="https://db.pokemongohub.net/_next/image?url=%2Fimages%2Fofficial%2Ffull%2F004.webp&w=640&q=75"/>
+                                    </div>
+                                    <div class="chart-trainer col">
+                                        <div class="chart-trainer-header">
+                                            <img src="https://pokemongohub.net/wp-content/uploads/2023/06/giovanni.jpg"/>
+                                            <h5>t.name</h5>
+                                        </div>
+                                        <ul>
+                                            <li>
+                                                <a>Badge.name</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="chart-description">
+                                        <h5>Ability</h5>
+                                        <p>description of ability</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart-footer">
+                                <p>Registered in Pokedex via Thymeleaf</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <row>Todo: add new pokemon & trainer</row>
+            </div>
+        </div>
+        <div class="footer">
+            <div>
+                <h1>Join to the battle</h1>
+                <ul>
+                    <li><a>Social Media</a></li>
+                    <li><a>About Us</a></li>
+                    <li><a>Share with</a></li>
+                </ul>
+                <p>Copyright / Duvi 2024</p>
+            </div>
+        </div>
+    </body>
 </html>
