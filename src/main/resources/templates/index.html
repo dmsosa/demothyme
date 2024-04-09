@@ -35,36 +35,106 @@
         </div>
         <div class="main">
             <div class="banner">
-                <h1 th:utext="#{login.welcome}">Welcome to your PC  <span th:if="${today}">today is: 08/04/2024</span></h1>
+                <h1 th:utext="#{title.welcome(${#dates.createToday})}">Welcome to your PC, today is: 08/04/2024</h1>
                 <div>
                     <h2 th:utext="#{banner.text}">Patience is a tree where the roots are sour but the fruits are so sweet!</h2>
                 </div>
             </div>
+            <form action="#" th:action="@{/savePokemon}" th:object="${pokemon}" method="POST">
+                <input type="text" placeholder="add Pokemon's name" th:placeholder="#{saveform.inputname}" name="name" th:field="*{name}"/>
+                <input type="text" placeholder="add Pokemon's type" th:placeholder="#{saveform.inputname}" name="type" th:field="*{type}"/>
+                <input type="text" placeholder="add Pokemon's ability" th:placeholder="#{saveform.inputname}" name="ability" th:field="*{ability}"/>
+                <input type="text" placeholder="add Pokemon's ability description" th:placeholder="#{saveform.inputname}" name="description" th:field="*{description}"/>
+                <button type="submit" th:text="#{saveform.button}">Add to PokeDex</button>
+            </form>
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <form class="trainerFinder">
-                            <label for="trainerName" th:text="#{trainer.finder}">Trainer Name</label>
-                            <input id="trainerName" type="text" placeholder="search a trainer" name="trainer"/>
+                        <form class="trainerCreator" action="#" th:action="@{/createTrainer}" th:object="${trainer}" method="POST">
+                            <label for="trainerName" th:text="#{trainer.creator.name}">Trainer Name</label>
+                            <input id="trainerName" type="text" placeholder="what's your name?" th:placeholder="#{trainer.creator.name.placeholder}"  th:field="*{name}" minlenght="3" required/>
+                            <label for="trainerPhrase" th:text="#{trainer.creator.name}">Trainer Name</label>
+                            <input id="trainerPhrase" type="text" placeholder="Which phrase characterizes you?" th:placeholder="#{trainer.creator.phrase.placeholder}"  name="phrase" th:field="*{phrase}" minlength="10" required/>
+                            <label for="trainerPicture" th:text="#{trainer.creator.name}">Trainer Name</label>
+                            <input id="trainerPicture" type="text" placeholder="How do you look like?" th:placeholder="#{trainer.creator.picture.placeholder}" name="picture" th:field="*{picture}"/>
+                            <button type="submit" th:text="#{trainer.creator.submit}">Search</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <caption th:text="#{alltable.pokemon.caption}">All Pokemon Registered in PokeDex:</caption>
+                        <table class="table alltable" th:each="pokemon : ${allPokemon}">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th th:text="#{table.type}">Type</th>
+                                <th th:text="#{table.ability}">Ability</th>
+                                <th th:text="#{table.trainer}">Trainer</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <a th:href="@{/pokemon/{pokemonName}(pokemonName=${pokemon.name})}" class="pokemon-selector">
+                                        <th th:text="${pokemon.name}">Charmander</th>
+                                        <td th:text="${pokemon.type}">Fire</td>
+                                        <td th:text="${pokemon.ability}">Blaze</td>
+                                        <td th:text="${pokemon.trainer != null} ? ${pokemon.trainer.name} : #{pokemon.wild}">Giovanni</td>
+                                    </a>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col">
+                        <caption th:text="#{alltable.trainer.caption}">All Trainers</caption>
+                        <table class="table alltable trainers" th:each="trainer: ${allTrainers}">
+                            <thead>
+                                <tr>
+                                    <th th:text="#{table.name}">Name</th>
+                                    <th th:text="#{table.badges}">Badges</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <a th:href="@{/trainer/{trainerName}(trainerName=${trainer.name})}" class="trainer-selector">
+                                        <td th:text="${trainer.name}">Giovanni</td>
+                                        <td th:text="${trainer.badges != null } ? ${trainer.badges.size()} : 0">8</td>
+                                    </a>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <form class="trainerFinder" action="#" th:action="@{/trainer}" method="GET">
+                            <label for="trainerSearch" th:text="#{trainer.finder.label}">Trainer Name</label>
+                            <input id="trainerSearch" type="text" placeholder="search a trainer" th:placeholder="#{trainer.finder.placeholder}" name="name"/>
                             <button type="submit" th:text="#{trainer.finder.search}">Search</button>
                         </form>
                     </div>
-                    <div class="col">
+                    <div class="col" th:if="${trainer.name != null} and ${trainer.phrase != null}">
                         <div class="currently-selected">
                             <h3 th:text="#{trainer.selected}">Currently selected:</h3>
                             <div>
-                                <img src="https://pokemongohub.net/wp-content/uploads/2023/06/giovanni.jpg"/>
-                                <span>Giovanni</span>
+                                <img src="https://pokemongohub.net/wp-content/uploads/2023/06/giovanni.jpg"
+                                th:src="@{/images/{trainerName}(trainerName=${#strings.toLowerCase(#strings.replace(trainer.name, ' ', '')) + '.jpg'})}"
+                                alt="Giovanni's picture"
+                                 th:alt="${trainer.name + '''s picture'}"
+                                />
+                                <span th:text="${trainer.name}">Giovanni</span>
+                                <span th:text="${trainer.phrase}">I'll crush you.</span>
                             </div>
+                            <a href="/editor/trainer" th:href="@{/editor/trainer/{trainerName}(trainerName=${trainer.name})}" th:text="#{trainer.selected.editor}">Edit trainer</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="container content-container">
+            <div class="container content-container" th:if="${trainer.name != null} and ${trainer.team != null}">
                 <div class="row">
                     <div class="col">
-                        <table class="table" th:each="pokemon : ${AllPokemon}">
-                            <caption>Giovanni's team</caption>
+                        <caption th:text="${trainer.name + '''s team'}">Giovanni's team</caption>
+                        <table class="table team-table clickable-table" th:each="pokemon : ${trainer.team}">
                             <thead>
                             <tr>
                                 <th></th>
@@ -74,46 +144,73 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th th:text="${pokemon.name}">Charmander</th>
-                                <td th:text="${pokemon.type}">Fire</td>
-                                <td th:text="${pokemon.ability}">Blaze</td>
-                                <td th:text="${pokemon.trainer.name}">Giovanni</td>
-                            </tr>
+                                <tr data-href="#" th:data-href="@{@{/pokemon/{pokemonName}(pokemonName=${pokemon.name})}}">
+                                    <th th:text="${pokemon.name}">Charmander</th>
+                                    <td th:text="${pokemon.type}">Fire</td>
+                                    <td th:text="${pokemon.ability}">Blaze</td>
+                                    <td th:text="${pokemon.trainer.name}">Giovanni</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="col">
+                    <div class="col" th:if="${pokemon.name != null}">
                         <div class="chart">
                             <div class="chart-header">
-                                <h3>P.name</h3>
+                                <h3 th:text="${pokemon.name}">Charmander</h3>
                             </div>
                             <div id="chart-body" class="chart-body">
                                 <div class="row" id="r">
                                     <div class="chart-picture col">
-                                        <img src="https://db.pokemongohub.net/_next/image?url=%2Fimages%2Fofficial%2Ffull%2F004.webp&w=640&q=75"/>
+                                        <img src="https://db.pokemongohub.net/_next/image?url=%2Fimages%2Fofficial%2Ffull%2F004.webp&w=640&q=75"
+                                        th:src="${pokemon.image}"
+                                        title="${pokemon.name}"
+                                        />
                                     </div>
                                     <div class="chart-trainer col">
                                         <div class="chart-trainer-header">
-                                            <img src="https://pokemongohub.net/wp-content/uploads/2023/06/giovanni.jpg"/>
-                                            <h5>t.name</h5>
+                                            <img src="https://pokemongohub.net/wp-content/uploads/2023/06/giovanni.jpg"
+                                                 th:src="${trainer.picture}"
+
+                                                 title="${trainer.name}"/>
+                                            <h5 th:text="${trainer.name}">Giovanni</h5>
                                         </div>
-                                        <ul>
+                                        <ul th:each=" badge : ${trainer.badges}">
                                             <li>
-                                                <a>Badge.name</a>
+                                                <a th:text="${badge.name}">Bug</a>
+                                            </li>
+                                            <li>
+                                                <a th:text="${badge.name}">Rock</a>
+                                            </li>
+                                            <li>
+                                                <a th:text="${badge.name}">Fight</a>
+                                            </li>
+                                            <li>
+                                                <a th:text="${badge.name}">Grass</a>
+                                            </li>
+                                            <li>
+                                                <a th:text="${badge.name}">Electric</a>
+                                            </li>
+                                            <li>
+                                                <a th:text="${badge.name}">Fairy</a>
+                                            </li>
+                                            <li>
+                                                <a th:text="${badge.name}">Psychic</a>
+                                            </li>
+                                            <li>
+                                                <a th:text="${badge.name}">Ice</a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="chart-description">
-                                        <h5>Ability</h5>
-                                        <p>description of ability</p>
+                                        <h5 th:text="{pokemon.ability}">Blaze</h5>
+                                        <p th:text="{pokemon.description}">Powers up Fire-type moves when the Pokémon’s HP is low.</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="chart-footer">
-                                <p>Registered in Pokedex via Thymeleaf</p>
+                                <p th:text="#{chart.footer.message}">Registered in Pokedex via Thymeleaf</p>
                             </div>
                         </div>
                     </div>
@@ -123,14 +220,15 @@
         </div>
         <div class="footer">
             <div>
-                <h1>Join to the battle</h1>
+                <h1 th:text="#{footer.title}">Join to the battle</h1>
                 <ul>
-                    <li><a>Social Media</a></li>
-                    <li><a>About Us</a></li>
-                    <li><a>Share with</a></li>
+                    <li th:text="#{footer.social}"><a>Social Media</a></li>
+                    <li th:text="#{footer.about}"><a>About Us</a></li>
+                    <li th:text="#{footer.share}"><a>Share with</a></li>
                 </ul>
                 <p>Copyright / Duvi 2024</p>
             </div>
         </div>
     </body>
+    <script src="../static/js/addclick.js" th:src="@{/js/addclick.js}"></script>
 </html>

@@ -39,6 +39,7 @@ h1 {
 }
 
 .logo-div {
+    color: white;
     display: flex;
     .logo {
         display: inline;
@@ -334,6 +335,7 @@ tbody {
 }
 
 .footer {
+    color: white;
     margin: 0;
     height: 18rem;
     background-color: darkred;

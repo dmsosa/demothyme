@@ -9,14 +9,18 @@ public enum Type {
     ELECTRIC("ELECTRIC"),
     WATER("WATER"),
     FIRE("FIRE"),
+    GRASS("GRASS"),
     DRAGON("DRAGON"),
     ROCK("ROCK"),
-    GRASS("GRASS");
 
-    public static final Type[] ALL = { ELECTRIC, WATER, FIRE, DRAGON, ROCK,  GRASS };
+    FLYING("FLYING"),
+    POISON("POISON");
+
+    public static final Type[] ALL = { ELECTRIC, WATER, FIRE, GRASS,
+            DRAGON, ROCK, FLYING, POISON };
     private final String name;
 
-    private static Type forName(String name) {
+    public static Type forName(String name) {
         if (name == null) {
             throw new IllegalArgumentException("Name cannot be null for type");
         }
@@ -31,14 +35,20 @@ public enum Type {
             case "FIRE" : {
                 return FIRE;
             }
+            case "GRASS" : {
+                return GRASS;
+            }
             case "DRAGON" : {
                 return DRAGON;
             }
             case "ROCK" : {
                 return ROCK;
             }
-            case "GRASS" : {
-                return GRASS;
+            case "FLYING" : {
+                return FLYING;
+            }
+            case "POISON" : {
+                return POISON;
             }
             default: {
                 throw new IllegalArgumentException("Name \"" + name + "\" does not correspond to any Type");

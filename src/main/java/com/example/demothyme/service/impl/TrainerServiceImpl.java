@@ -24,7 +24,12 @@ public class TrainerServiceImpl implements TrainerService {
 
     @Override
     public Trainer findTrainer(String name) {
-        return trainerRepository.findById(name).orElseThrow();
+        return trainerRepository.findByName(name).orElseThrow();
+    }
+
+    @Override
+    public Optional<Trainer> findOptionalTrainer(String name) {
+        return trainerRepository.findByName(name);
     }
 
     @Override
@@ -34,25 +39,34 @@ public class TrainerServiceImpl implements TrainerService {
 
     @Override
     public void saveTrainer(Trainer trainer) {
-
+        Optional<Trainer> optionalTrainer = trainerRepository.findByName(trainer.getName());
+        if (optionalTrainer.isPresent()) {
+            throw new RuntimeException("Trainer already exists");
+        }
+        trainerRepository.save(trainer);
     }
 
     @Override
     public void deleteTrainer(String name) {
-        Optional<Trainer> optTrainer = trainerRepository.findById(name);
+        Optional<Trainer> optTrainer = trainerRepository.findByName(name);
         if (optTrainer.isPresent()) {
             Trainer trainer = optTrainer.get();
             trainerRepository.delete(trainer);
         }
 
     }
+    @Override
+    public void deleteTrainer(Trainer trainer) {
+            trainerRepository.delete(trainer);
+    }
 
     @Override
     public Trainer editTrainer(String name, Trainer newTrainer) {
-        Optional<Trainer> optTrainer = trainerRepository.findById(name);
+        Optional<Trainer> optTrainer = trainerRepository.findByName(name);
         if (optTrainer.isPresent()) {
             Trainer trainer = optTrainer.get();
             trainer.setName(newTrainer.getName());
+            trainer.setPhrase(newTrainer.getPhrase());
             trainer.setTeam(newTrainer.getTeam());
             trainer.setBadges(newTrainer.getBadges());
             trainer.setPicture(newTrainer.getPicture());

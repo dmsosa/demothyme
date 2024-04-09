@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title th:text="#{creator.title}">DMSosa: Thymeleaf - Creator</title>
+    <link rel="icon" href="../static/images/favicon.ico"  th:href="@{/images/favicon.ico}" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div class="header">
+    <div class="navbar">
+        <div class="logo-div" >
+            <img src="../static/images/pokeball.png"
+                 th:src="@{/images/pokeball.png}"
+                 alt="Pokeball Icon"
+                 title="Thymeleaf & Spring with Pokemon"
+                 th:alt-title="#{title.application}"
+                 class="logo"
+            />
+            <a class="logo-link">Pokedemo</a>
+        </div>
+        <ul class="menu">
+            <li class="menu-item">
+                <a class="menu-link" th:text="#{navbar.option.one}">Explore</a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" th:text="#{navbar.option.two}">Discover</a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" th:text="#{navbar.option.three}">Challenge</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="main">
+    <div class="banner">
+        <h1 th:utext="#{editor.title.welcome(${#dates.createNow})}">Welcome to your Creator, today is: 08/04/2024</h1>
+        <div>
+            <h2 th:utext="#{creator.banner.text}">This is like a Pokedex!</h2>
+        </div>
+    </div>
+    <form action="#" th:action="@{/pokemon}" th:object="${pokemon}" method="POST">
+        <fieldset>
+            <legend th:text="#{pokeForm}">Register a new Pokemon</legend>
+
+            <div>
+                <label th:for="name" th:text="#{pokeForm.name}">Pokemon's name</label>
+                <input type="text" th:placeholder="#{pokeForm.name.placeholder}" th:field="*{name}"/>
+            </div>
+            <div>
+                <label th:text="#{pokeForm.type}">Pokemon's Primary Type</label>
+                <select th:field="*{type}">
+                    <option th:each="type : ${allTypes}"  th:value="${type}" th:text="#{${'pokemon.type.' + type}}">Fire</option>
+                </select>
+                <label th:text="#{pokeForm.type}">Pokemon's Secondary Type</label>
+                <select th:field="*{type}">
+                    <option th:each="type : ${allTypes}"  th:value="${type}" th:text="#{${'pokemon.type.' + type}}">Fire</option>
+                </select>
+            </div>
+            <div>
+                <label th:text="#{pokeForm.ability}">Pokemon's Ability</label>
+                <input type="text" th:placeholder="#{pokeForm.ability.placeholder}" th:field="*{ability}"/>
+            </div>
+            <div>
+                <label th:text="#{pokeForm.description}">Pokemon's Ability</label>
+                <input type="text" th:placeholder="#{pokeForm.description.placeholder}" th:field="*{description}"/>
+
+            </div>
+            <div>
+                <label th:text="#{pokeForm.trainerName}">Pokemon's Trainer</label>
+                <input type="text" th:placeholder="#{pokeForm.trainerName.placeholder}" name="trainer" th:field="*{trainer.name}"/>
+            </div>
+            <div class="submit">
+                <button type="submit" name="save" th:text="#{pokeForm.create}">Create pokemon</button>
+            </div>
+        </fieldset>
+    </form>
+
+</div>
+<div class="footer">
+    <div>
+        <h1 th:text="#{footer.title}">Join to the battle</h1>
+        <ul>
+            <li th:text="#{footer.social}"><a>Social Media</a></li>
+            <li th:text="#{footer.about}"><a>About Us</a></li>
+            <li th:text="#{footer.share}"><a>Share with</a></li>
+        </ul>
+        <p>Copyright / Duvi 2024</p>
+    </div>
+</div>
+</body>
+</html>

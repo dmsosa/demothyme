@@ -17,7 +17,10 @@ import java.util.Set;
 @NoArgsConstructor
 public class Trainer {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
+    private String phrase;
     private String picture;
     private List<Badge> badges;
     @OneToMany(mappedBy = "trainer")

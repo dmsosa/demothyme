@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title th:text="#{editor.title}">DMSosa: Thymeleaf - Editor</title>
+  <link rel="icon" href="../static/images/favicon.ico"  th:href="@{/images/favicon.ico}" type="image/x-icon"/>
+  <link rel="stylesheet" type="text/css" media="all" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div class="header">
+  <div class="navbar">
+    <div class="logo-div" >
+      <img src="../static/images/pokeball.png"
+           th:src="@{/images/pokeball.png}"
+           alt="Pokeball Icon"
+           title="Thymeleaf & Spring with Pokemon"
+           th:alt-title="#{title.application}"
+           class="logo"
+      />
+      <a class="logo-link">Pokedemo</a>
+    </div>
+    <ul class="menu">
+      <li class="menu-item">
+        <a class="menu-link" th:text="#{navbar.option.one}">Explore</a>
+      </li>
+      <li class="menu-item">
+        <a class="menu-link" th:text="#{navbar.option.two}">Discover</a>
+      </li>
+      <li class="menu-item">
+        <a class="menu-link" th:text="#{navbar.option.three}">Challenge</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="main">
+  <div class="banner">
+    <h1 th:utext="#{editor.title.welcome(${#dates.createToday})}">Welcome to your Editor, today is: 08/04/2024</h1>
+    <div>
+      <h2 th:utext="#{editor.banner.text(${trainer.name})}">Edit Giovanni!</h2>
+    </div>
+  </div>
+  <form action="#" th:action="@{/editTrainer/{trainerName}(trainerName=${trainer.name})}" th:object="${trainer}" method="POST">
+    <input type="text" placeholder="edit trainer's name" th:placeholder="#{edit.trainer.form.name}" name="name" th:field="*{name}"/>
+    <input type="text" placeholder="edit trainer's phrase" th:placeholder="#{edit.trainer.form.phrase}" name="phrase" th:field="*{phrase}"/>
+
+    <select name="badges[]" th:field="*{badges}" multiple>
+      <div th:each="badge : ${allBadges}">
+        <option value="${badge}" name="badges[]" th:text="${badge.getName()}">Bug</option>
+      </div>
+    </select>
+    <button type="submit" th:text="#{edit.trainer.form.button}">Edit trainer</button>
+  </form>
+
+</div>
+<div class="footer">
+  <div>
+    <h1 th:text="#{footer.title}">Join to the battle</h1>
+    <ul>
+      <li th:text="#{footer.social}"><a>Social Media</a></li>
+      <li th:text="#{footer.about}"><a>About Us</a></li>
+      <li th:text="#{footer.share}"><a>Share with</a></li>
+    </ul>
+    <p>Copyright / Duvi 2024</p>
+  </div>
+</div>
+</body>
+</html>
