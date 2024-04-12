@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -22,7 +23,8 @@ public class Trainer {
     private String name;
     private String phrase;
     private String picture;
+    @Enumerated(value = EnumType.STRING)
     private List<Badge> badges;
-    @OneToMany(mappedBy = "trainer")
-    private Set<Pokemon> team;
+    @OneToMany(mappedBy = "trainer", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    private List<Pokemon> team = new ArrayList<Pokemon>();
 }

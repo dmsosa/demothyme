@@ -8,6 +8,8 @@ import java.util.List;
 @Service
 public interface PokemonService {
     List<Pokemon> getAllPokemon();
+    List<Pokemon> getAllWildPokemon();
+    List<Pokemon> getStarters();
     Pokemon findPokemon(Long id);
     Pokemon findPokemon(String name);
     void addPokemon(Pokemon pokemon);

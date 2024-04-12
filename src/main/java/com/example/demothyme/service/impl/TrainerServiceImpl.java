@@ -38,26 +38,23 @@ public class TrainerServiceImpl implements TrainerService {
     }
 
     @Override
-    public void saveTrainer(Trainer trainer) {
+    public Trainer saveTrainer(Trainer trainer) {
         Optional<Trainer> optionalTrainer = trainerRepository.findByName(trainer.getName());
         if (optionalTrainer.isPresent()) {
             throw new RuntimeException("Trainer already exists");
         }
-        trainerRepository.save(trainer);
+        return trainerRepository.save(trainer);
     }
 
     @Override
     public void deleteTrainer(String name) {
         Optional<Trainer> optTrainer = trainerRepository.findByName(name);
-        if (optTrainer.isPresent()) {
-            Trainer trainer = optTrainer.get();
-            trainerRepository.delete(trainer);
-        }
+        optTrainer.ifPresent(trainer -> trainerRepository.delete(trainer));
 
     }
     @Override
     public void deleteTrainer(Trainer trainer) {
-            trainerRepository.delete(trainer);
+        trainerRepository.delete(trainer);
     }
 
     @Override

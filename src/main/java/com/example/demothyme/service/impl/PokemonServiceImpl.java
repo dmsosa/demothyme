@@ -1,14 +1,17 @@
 package com.example.demothyme.service.impl;
 
 import com.example.demothyme.model.Pokemon;
+import com.example.demothyme.model.Type;
 import com.example.demothyme.repository.PokemonRepository;
 import com.example.demothyme.service.PokemonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PokemonServiceImpl implements PokemonService {
@@ -20,6 +23,36 @@ public class PokemonServiceImpl implements PokemonService {
     @Override
     public List<Pokemon> getAllPokemon() {
         return pokemonRepository.findAll();
+    }
+    @Override
+    public List<Pokemon> getAllWildPokemon() {
+        return pokemonRepository.findAll().stream().filter(pokemon -> pokemon.getTrainer() == null).collect(Collectors.toList());
+    }
+    @Override
+    public List<Pokemon> getStarters() {
+        Pokemon fennekin = new Pokemon();
+        Pokemon chespin = new Pokemon();
+        Pokemon froakie = new Pokemon();
+
+        fennekin.setName("Fennekin");
+        fennekin.setAbility("Blaze");
+        fennekin.setDescription("Powers up Fire-type moves when the Pokémon’s HP is low.");
+        fennekin.setPicture("https://assets.pokemon.com/assets/cms2/img/pokedex/full/653.png");
+        fennekin.setType(new Type[]{Type.FIRE});
+        fennekin.setTrainer(null);
+        chespin.setName("Chespin");
+        chespin.setAbility("Overgrow");
+        chespin.setDescription("Powers up Grass-type moves when the Pokémon’s HP is low.");
+        chespin.setPicture("https://assets.pokemon.com/assets/cms2/img/pokedex/full/650.png");
+        chespin.setType(new Type[]{Type.GRASS});
+        chespin.setTrainer(null);
+        froakie.setName("Froakie");
+        froakie.setAbility("Torrent");
+        froakie.setDescription("Powers up Water-type moves when the Pokémon’s HP is low.");
+        froakie.setPicture("https://assets.pokemon.com/assets/cms2/img/pokedex/full/656.png");
+        froakie.setType(new Type[]{Type.WATER});
+        froakie.setTrainer(null);
+        return List.of(fennekin, chespin, froakie);
     }
 
     @Override
@@ -53,8 +86,7 @@ public class PokemonServiceImpl implements PokemonService {
         pokemon.setPicture(newPokemon.getPicture());
         pokemon.setTrainer(newPokemon.getTrainer());
 
-        Pokemon savedPokemon = pokemonRepository.save(pokemon);
-        return savedPokemon;
+        return pokemonRepository.save(pokemon);
     }
 
     @Override

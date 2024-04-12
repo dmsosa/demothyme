@@ -10,7 +10,9 @@ CREATE TABLE trainer (
 CREATE TABLE pokemon (
     id INTEGER NOT NULL AUTO_INCREMENT,
     name VARCHAR(40) NOT NULL,
-    type ENUM('ELECTRIC', 'WATER', 'FIRE', 'GRASS', 'DRAGON', 'ROCK', 'FLYING', 'POISON') ARRAY,
+    type ENUM('ELECTRIC', 'WATER', 'FIRE', 'GRASS', 'DRAGON', 'ROCK', 'FLYING', 'POISON',
+    'PSYCHIC', 'DARK', 'FAIRY', 'STEEL', 'ICE',
+    'NORMAL', 'FIGHTING', 'BUG', 'GHOST', 'GROUND') ARRAY,
     trainer_name VARCHAR(40),
     ability VARCHAR(20),
     description VARCHAR(500),

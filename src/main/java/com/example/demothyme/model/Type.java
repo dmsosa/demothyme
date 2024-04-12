@@ -14,10 +14,24 @@ public enum Type {
     ROCK("ROCK"),
 
     FLYING("FLYING"),
-    POISON("POISON");
+    POISON("POISON"),
+    PSYCHIC("PSYCHIC"),
+    DARK("DARK"),
+    FAIRY("FAIRY"),
+    STEEL("STEEL"),
+    ICE("ICE"),
+    NORMAL("NORMAL"),
+    FIGHTING("FIGHTING"),
+    BUG("BUG"),
+    GHOST("GHOST"),
+    GROUND("GROUND")
+    ;
 
     public static final Type[] ALL = { ELECTRIC, WATER, FIRE, GRASS,
-            DRAGON, ROCK, FLYING, POISON };
+            DRAGON, ROCK, FLYING, POISON,
+            PSYCHIC, DARK, FAIRY, STEEL,
+            ICE, NORMAL, FIGHTING, BUG,
+            GHOST, GROUND };
     private final String name;
 
     public static Type forName(String name) {
@@ -50,6 +64,37 @@ public enum Type {
             case "POISON" : {
                 return POISON;
             }
+            case "PSYCHIC" : {
+                return PSYCHIC;
+            }
+            case "DARK" : {
+                return DARK;
+            }
+            case "FAIRY" : {
+                return FAIRY;
+            }
+            case "STEEL" : {
+                return STEEL;
+            }
+            case "ICE" : {
+                return ICE;
+            }
+            case "NORMAL" : {
+                return NORMAL;
+            }
+            case "FIGHTING" : {
+                return FIGHTING;
+            }
+            case "BUG" : {
+                return BUG;
+            }
+            case "GHOST" : {
+                return GHOST;
+            }
+            case "GROUND" : {
+                return GROUND;
+            }
+
             default: {
                 throw new IllegalArgumentException("Name \"" + name + "\" does not correspond to any Type");
             }

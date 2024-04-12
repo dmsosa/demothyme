@@ -28,7 +28,7 @@ public class Pokemon {
     private String description;
     private String picture;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinColumn( name = "trainer_name", referencedColumnName = "name")
     private Trainer trainer;
 

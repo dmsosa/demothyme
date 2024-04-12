@@ -11,7 +11,7 @@ public interface TrainerService {
     public Trainer findTrainer(String name);
     public Optional<Trainer> findOptionalTrainer(String name);
     public List<Trainer> findAllTrainers();
-    public void saveTrainer(Trainer trainer);
+    public Trainer saveTrainer(Trainer trainer);
     public void deleteTrainer(String name);
     public void deleteTrainer(Trainer trainer);
     public Trainer editTrainer(String name, Trainer newTrainer);

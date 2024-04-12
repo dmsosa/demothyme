@@ -7,7 +7,7 @@ INSERT INTO trainer (name, phrase, picture, badges) VALUES (
     ,ARRAY ['BUG', 'ROCK', 'FIGHT', 'ELECTRIC', 'GRASS']
 );
 INSERT INTO trainer  (name, phrase, picture, badges) VALUES (
-    'Gary Oak', 'I am here to battle, not to talk','https://static.wikia.nocookie.net/pokemonfanon/images/7/75/Gary_Oak_JN.png/revision/latest?cb=20210531065718'
+    'Gary Oak', 'I am here to battle, not to talk','https://i.pinimg.com/originals/59/f7/b0/59f7b0f8ac5bad2e8fc9e69ebb9482c1.png'
     ,ARRAY ['BUG', 'ROCK', 'FIGHT', 'ELECTRIC', 'GRASS', 'FAIRY']
 );
 INSERT INTO trainer (name, phrase, picture, badges) VALUES (
@@ -36,6 +36,15 @@ INSERT INTO pokemon(name, type, trainer_name, ability, description, picture) VAL
 );
 INSERT INTO pokemon(name, type, trainer_name, ability, description, picture) VALUES (
     'Dragonite', ARRAY ['DRAGON', 'FLYING'], 'Giovanni', 'Inner Focus', 'The Pokémon’s intense focus prevents it from flinching or being affected by Intimidate.', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/149.png'
+);
+INSERT INTO pokemon(name, type, trainer_name, ability, description, picture) VALUES (
+    'Dragonite', ARRAY ['DRAGON', 'FLYING'], null, 'Inner Focus', 'The Pokémon’s intense focus prevents it from flinching or being affected by Intimidate.', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/149.png'
+);
+INSERT INTO pokemon(name, type, trainer_name, ability, description, picture) VALUES (
+    'Dragonite', ARRAY ['DRAGON', 'FLYING'], null, 'Inner Focus', 'The Pokémon’s intense focus prevents it from flinching or being affected by Intimidate.', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/149.png'
+);
+INSERT INTO pokemon(name, type, trainer_name, ability, description, picture) VALUES (
+    'Dragonite', ARRAY ['DRAGON', 'FLYING'], null, 'Inner Focus', 'The Pokémon’s intense focus prevents it from flinching or being affected by Intimidate.', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/149.png'
 );
 
 

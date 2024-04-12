@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title th:text="#{editor.trainer.title}">DMSosa: Thymeleaf - Edit Your Trainer!</title>
+  <link rel="icon" href="../static/images/favicon.ico"  th:href="@{/images/favicon.ico}" type="image/x-icon"/>
+  <link rel="stylesheet" type="text/css" media="all" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div class="header">
+  <div class="navbar">
+    <div class="logo-div" >
+      <img src="../static/images/pokeball.png"
+           th:src="@{/images/pokeball.png}"
+           alt="Pokeball Icon"
+           title="Thymeleaf & Spring with Pokemon"
+           th:alt-title="#{title.application}"
+           class="logo"
+      />
+      <a class="logo-link">Pokedemo</a>
+    </div>
+    <ul class="menu">
+      <li class="menu-item">
+        <a class="menu-link" th:text="#{navbar.option.one}">Explore</a>
+      </li>
+      <li class="menu-item">
+        <a class="menu-link" th:text="#{navbar.option.two}">Discover</a>
+      </li>
+      <li class="menu-item">
+        <a class="menu-link" th:text="#{navbar.option.three}">Challenge</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="main">
+  <div class="banner">
+    <h1 th:utext="#{editor.title.welcome(${#dates.createToday})}">Welcome to your Editor Bro!, today is: 08/04/2024</h1>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <form action="#" th:action="@{/editTrainer/{trainerName}(trainerName=${trainer.name})}" th:object="${trainer}" method="POST">
+          <fieldset>
+            <div>
+              <label th:for="name" th:text="#{editor.trainer.name}"></label>
+              <input type="text" th:placeholder="#{editor.trainer.name.placeholder}" th:field="*{name}"/>
+            </div>
+            <div>
+              <label th:for="phrase" th:text="#{editor.trainer.phrase}"></label>
+              <textarea rows="2" cols="4" th:placeholder="#{editor.trainer.phrase.placeholder}" th:field="*{phrase}"/>
+            </div>
+            <div>
+              <label th:for="badges"></label>
+              <select th:field="*{badges}" multiple>
+                <div th:each="badge : ${allBadges}">
+                  <option th:value="${badge}" th:text="#{${'badges.' + badge}}">Bug</option>
+                </div>
+              </select>
+            </div>
+            <table>
+              <caption th:text="#{editor.trainer.wildPokemon}">Wild Pokemon</caption>
+              <thead>
+              <tr>
+                <th th:text="#{table.pokemon.name}"></th>
+                <th th:text="#{table.pokemon.name}">Name</th>
+                <th th:text="#{table.pokemon.ability}">Ability</th>
+                <th th:text="#{table.pokemon.description}">Description</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each=" pokemon, stat : ${trainer.team}">
+                <td th:text="${stat.index}">1</td>
+                <td th:text="${pokemon.name}">Dragonair</td>
+                <td th:text="${pokemon.ability}">Shed Skin</td>
+                <td th:text="${pokemon.description}">The Pokémon may cure its own status conditions by shedding its skin.</td>
+                <td>
+                  <button type="submit" th:name="{addToTeam}" th:text="#{button.add}" th:value="${pokemon.id}">Add</button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </fieldset>
+          <button type="submit" th:text="#{edit.trainer.form.button}">Edit trainer</button>
+        </form>
+      </div>
+      <div class="col">
+        <table>
+          <caption th:text="#{editor.trainer.team(${trainer.name})}">Giovanni's current team</caption>
+          <thead>
+          <tr>
+            <th th:text="#{table.pokemon.name}"></th>
+            <th th:text="#{table.pokemon.name}">Name</th>
+            <th th:text="#{table.pokemon.ability}">Ability</th>
+            <th th:text="#{table.pokemon.description}">Description</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each=" teamMember, stat : ${trainer.team}">
+            <td th:text="${stat.index}">1</td>
+            <td th:text="${teamMember.name}">Charmander</td>
+            <td th:text="${teamMember.ability}">Blaze</td>
+            <td th:text="${teamMember.description}">Powers Up Fire-Type Movements when in a trouble</td>
+            <td>
+              <button type="submit" th:name="{removeFromTeam}" th:text="#{button.remove}">Delete</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <div>
+    <h1 th:text="#{footer.title}">Join to the battle</h1>
+    <ul>
+      <li th:text="#{footer.social}"><a>Social Media</a></li>
+      <li th:text="#{footer.about}"><a>About Us</a></li>
+      <li th:text="#{footer.share}"><a>Share with</a></li>
+    </ul>
+    <p>Copyright / Duvi 2024</p>
+  </div>
+</div>
+</body>
+</html>
